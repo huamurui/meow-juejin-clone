@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meows",
+  "info": {
+    "singularName": "meow",
+    "pluralName": "meows",
+    "displayName": "Meow"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    }
+  }
+}
