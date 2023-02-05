@@ -8,6 +8,7 @@
       {{ meow.attributes.name }}
       <br>
     </NuxtLink>
+
   </div>
 </template>
 
@@ -18,6 +19,8 @@ interface Meow {
 }
 const { find } = useStrapi()
 const response = await find<Meow>('meows')
+
+const content = ref<string>("Milkdown");
 </script>
 
 <style scoped>

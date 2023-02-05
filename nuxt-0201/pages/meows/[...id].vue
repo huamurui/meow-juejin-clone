@@ -4,6 +4,8 @@
     <p>{{ re.data.attributes.name }}</p>
 
     <p>{{ re.data.attributes.content }}</p>
+
+    <Milkdown :content="re.data.attributes.content" />
   </div>
 </template>
 
