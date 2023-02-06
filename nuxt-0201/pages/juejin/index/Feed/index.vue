@@ -1,88 +1,78 @@
 <template>
   <div>
     <div class="article-list">
-      <div class="article-pre" v-for="(item, index) in articles">
+      <NuxtLink class="article-pre" :to="`article/${meow.id}`" v-for="(meow, index) in response.data" :key="index">
 
         <div class="article-info">
           <div class="article-author">
-            <img src="https://sf3-ttcdn-tos.pstatp.com/img/user-avatar/1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b~300x300.image"
-              alt="">
-            <span>小胡子哥</span>
+            <!-- <img style="width:100px;height:100px;border-radius: 9999px;" src="https://huamurui.github.io/logo.svg"
+              alt="huamurui"> -->
+            <span>huamurui</span>
           </div>
           <div class="article-time">
-            2021-02-01
+            2023-02-01
           </div>
         </div>
 
         <div class="article-content">
           <div class="article-title">
-            <a>{{ item.title }}</a>
+            <a>{{ meow.attributes.name }}</a>
           </div>
           <div class="article-desc">
-            {{ item.desc }}
+            {{ meow.attributes.content }}
           </div>
-          <div v-if="item.img != null" class="article-img">
-            <img :src="item.img" alt="">
+          <div v-if="meow.img != null" class="article-img">
+            <img :src="meow.img" alt="">
           </div>
         </div>
 
         <div class="article-operation">
-          <div class="article-like">
-            <span class="iconfont icon-like"></span>
-            <span>喜欢</span>
+          <div class="article-view">
+            <i>
+              <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="none" stroke="#000" stroke-width="2"
+                  d="M12,17 C9.27272727,17 6,14.2222222 6,12 C6,9.77777778 9.27272727,7 12,7 C14.7272727,7 18,9.77777778 18,12 C18,14.2222222 14.7272727,17 12,17 Z M11,12 C11,12.55225 11.44775,13 12,13 C12.55225,13 13,12.55225 13,12 C13,11.44775 12.55225,11 12,11 C11.44775,11 11,11.44775 11,12 Z" />
+              </svg>
+            </i>
+          </div>
+          <div class="article-support">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+              aria-labelledby="supportiTitle" stroke="#000000" stroke-width="1" stroke-linecap="square"
+              stroke-linejoin="miter" fill="none" color="#000000">
+              <title id="supportiTitle">Support</title>
+              <path stroke-linecap="round"
+                d="M11 8L9.42229 7.21115C9.14458 7.07229 8.83835 7 8.52786 7H7.82843C7.29799 7 6.78929 7.21071 6.41421 7.58579L5.58579 8.41421C5.21071 8.78929 5 9.29799 5 9.82843L5 14.9296C5 15.5983 5.3342 16.2228 5.8906 16.5937L9.75746 19.1716C10.4944 19.663 11.4668 19.611 12.1472 19.044L17 15" />
+              <path
+                d="M14.4549 12.9142C13.8515 12.1062 12.741 11.8739 11.8643 12.3721L10.009 13.4266C9.41298 13.7653 8.66412 13.6641 8.17937 13.1794V13.1794C7.54605 12.546 7.59324 11.5056 8.2813 10.9323L12.4437 7.46356C12.8032 7.16403 13.2562 7 13.7241 7H14.5279C14.8384 7 15.1446 7.07229 15.4223 7.21115L17.8944 8.44721C18.572 8.786 19 9.47852 19 10.2361L19 12.9796C19 14.9037 16.5489 15.718 15.3976 14.1764L14.4549 12.9142Z" />
+              <path d="M1 17V8" />
+              <path d="M1 17V8" />
+              <path d="M23 17V8" />
+            </svg>
           </div>
           <div class="article-comment">
-            <span class="iconfont icon-comment"></span>
-            <span>评论</span>
-          </div>
-          <div class="article-share">
-            <span class="iconfont icon-share"></span>
-            <span>分享</span>
+            <svg width="24px" height="24px" viewBox="0 -0.08 20 20" data-name="Capa 1" id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M13.93,5.92l-7.79,0h0A1.25,1.25,0,0,0,4.91,7.09l0,8.5a.38.38,0,0,0,.23.35.4.4,0,0,0,.15,0,.35.35,0,0,0,.26-.12c.7-.71,1.93-1.72,2.46-1.72H8l5.92,0h0A1.23,1.23,0,0,0,15.1,13l0-5.8A1.23,1.23,0,0,0,13.93,5.92Zm.42,7a.47.47,0,0,1-.14.33.59.59,0,0,1-.33.14L8,13.38c-.71,0-1.69.75-2.34,1.33l0-7.62a.47.47,0,0,1,.47-.47h0l7.78,0a.44.44,0,0,1,.33.14.48.48,0,0,1,.14.34Z" />
+            </svg>
           </div>
         </div>
 
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-let articles = [
-  {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  },
-  {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  },
-  {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  },
-  {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }, {
-    title: "前端开发者必备的 10 个 VSCode 插件",
-    desc: "VSCode 是前端开发者的必备神器，它的插件市场也是前端开发者的福音。在这里，我们将为大家推荐 10 个必备的 VSCode 插件，希望能够帮助到大家。",
-  }
-]
+interface Meow {
+  name: string
+  content: string
+}
+const { find } = useStrapi()
+
+const response = await find<Meow>('meows')
+
+
 </script>
 
 <style scoped>
@@ -90,8 +80,6 @@ let articles = [
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  height: 100%;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
@@ -114,6 +102,8 @@ let articles = [
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 700px;
+  word-break: break-all;
   height: 100%;
 }
 
