@@ -1,7 +1,3 @@
-# 这依旧是一个demo
+# meow juejin clone
 
-有一个meow的小示例，还有扣的掘金的主页但是变形...比较惨不忍睹
-
-![img](chrome-capture-2023-1-1.gif)
-
-具体启动都在各自文件夹下面的README.md里面
+尝试仿掘金做一个网站，使用 nuxt 与 strapi
