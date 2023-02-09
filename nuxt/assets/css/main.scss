@@ -17,7 +17,7 @@ body {
   width: 0.5rem;
 }
 ::-webkit-scrollbar-track {
-  background: #ccc;
+  @include background_color("background_color1");
 }
 ::-webkit-scrollbar-thumb {
   @include background_color('theme_color');

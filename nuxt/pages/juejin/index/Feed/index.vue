@@ -83,6 +83,8 @@ const response = await find<Article>('articles', {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/main.scss";
+
 .article-pre {
   display: flex;
   flex-direction: column;
@@ -90,10 +92,11 @@ const response = await find<Article>('articles', {
   padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  @include background_color("background_color2");
+  box-shadow: 0 0 10px 0 rgba(128, 128, 128, 0.1);
 
   .article-info {
+    @include font_color("font_color2");
     display: flex;
     justify-content: space-between;
   }
@@ -109,7 +112,7 @@ const response = await find<Article>('articles', {
     .article-title {
       font-size: 16px;
       font-weight: 800;
-      color: #333;
+      @include font_color("font_color2");
       margin-bottom: 10px;
     }
 
@@ -128,6 +131,7 @@ const response = await find<Article>('articles', {
   }
 
   .article-operation {
+    @include font_color("font_color2");
     display: flex;
     justify-content: space-between;
     align-items: center;

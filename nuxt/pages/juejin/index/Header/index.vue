@@ -65,14 +65,14 @@
         </NuxtLink>
       </div>
       <div class="dark-mode">
-        <a @click="changeTheMode">
-          <div v-show="!dark">
+        <a @click="useChangeTheme()">
+          <div v-show="!circle.value">
             <svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M19 9.199h-.98c-.553 0-1 .359-1 .801 0 .441.447.799 1 .799H19c.552 0 1-.357 1-.799 0-.441-.449-.801-1-.801zM10 4.5c-3.051 0-5.5 2.449-5.5 5.5s2.449 5.5 5.5 5.5c3.05 0 5.5-2.449 5.5-5.5S13.049 4.5 10 4.5zm0 9.5c-2.211 0-4-1.791-4-4 0-2.211 1.789-4 4-4a4 4 0 0 1 0 8zm-7-4c0-.441-.449-.801-1-.801H1c-.553 0-1 .359-1 .801 0 .441.447.799 1 .799h1c.551 0 1-.358 1-.799zm7-7c.441 0 .799-.447.799-1V1c0-.553-.358-1-.799-1-.442 0-.801.447-.801 1v1c0 .553.359 1 .801 1zm0 14c-.442 0-.801.447-.801 1v1c0 .553.359 1 .801 1 .441 0 .799-.447.799-1v-1c0-.553-.358-1-.799-1zm7.365-13.234c.391-.391.454-.961.142-1.273s-.883-.248-1.272.143l-.7.699c-.391.391-.454.961-.142 1.273s.883.248 1.273-.143l.699-.699zM3.334 15.533l-.7.701c-.391.391-.454.959-.142 1.271s.883.25 1.272-.141l.7-.699c.391-.391.454-.961.142-1.274s-.883-.247-1.272.142zm.431-12.898c-.39-.391-.961-.455-1.273-.143s-.248.883.141 1.274l.7.699c.391.391.96.455 1.272.143s.249-.883-.141-1.273l-.699-.7zm11.769 14.031l.7.699c.391.391.96.453 1.272.143.312-.312.249-.883-.142-1.273l-.699-.699c-.391-.391-.961-.455-1.274-.143s-.248.882.143 1.273z" />
             </svg>
           </div>
-          <div v-show="dark">
+          <div v-show="circle.value">
             <svg width="24px" height="24px" viewBox="-80 0 512 512" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M96.06 454.35c.01 6.29 1.87 12.45 5.36 17.69l17.09 25.69a31.99 31.99 0 0 0 26.64 14.28h61.71a31.99 31.99 0 0 0 26.64-14.28l17.09-25.69a31.989 31.989 0 0 0 5.36-17.69l.04-38.35H96.01l.05 38.35zM0 176c0 44.37 16.45 84.85 43.56 115.78 16.52 18.85 42.36 58.23 52.21 91.45.04.26.07.52.11.78h160.24c.04-.26.07-.51.11-.78 9.85-33.22 35.69-72.6 52.21-91.45C335.55 260.85 352 220.37 352 176 352 78.61 272.91-.3 175.45 0 73.44.31 0 82.97 0 176zm176-80c-44.11 0-80 35.89-80 80 0 8.84-7.16 16-16 16s-16-7.16-16-16c0-61.76 50.24-112 112-112 8.84 0 16 7.16 16 16s-7.16 16-16 16z" />
@@ -86,6 +86,8 @@
 </template>
 
 <script setup lang="ts">
+import { useChangeTheme, circle } from "~/composables/useChangeTheme"
+
 let menuItems = [
   "首页",
   "沸点",
@@ -105,25 +107,16 @@ let showNavs = () => {
   show.value = !show.value
 }
 
-let dark = ref(false)
-let changeTheMode = () => {
-  dark.value = !dark.value
-  if (dark.value) {
-    document.body.classList.add('dark')
-  } else {
-    document.body.classList.remove('dark')
-  }
-}
-
 
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/main.scss";
+
 .header {
   position: fixed;
   top: 0;
-  z-index: 1;
-  background-color: #ffffff;
+  @include background_color("background_color1");
 
   width: 100%;
   display: flex;
@@ -164,7 +157,8 @@ let changeTheMode = () => {
     margin-left: 20px;
 
     .active {
-      color: rgb(0, 76, 255);
+      @include font_color("theme_color");
+      font-weight: 1000;
     }
   }
 
@@ -172,13 +166,14 @@ let changeTheMode = () => {
   .menu-item {
     display: flex;
     align-items: center;
-    color: rgb(42, 42, 42);
+    @include font_color("font_color2");
     height: 60px;
     margin-right: 20px;
 
     &:hover {
-      color: rgb(0, 47, 157);
-      border-bottom: 2px solid rgb(42, 42, 42);
+      @include font_color("theme_color");
+      border-bottom: 3px solid rgb(42, 42, 42);
+      @include border_color("theme_color");
       cursor: pointer;
     }
   }
@@ -191,7 +186,11 @@ let changeTheMode = () => {
     height: 100%;
     margin-right: 20px;
 
+
     input {
+      @include background_color("background_color2");
+      @include font_color("font_color1");
+
       width: 85%;
       height: 40px;
       border: 1px solid #e6e6e6;
@@ -212,7 +211,7 @@ let changeTheMode = () => {
         line-height: 40px;
         width: 100px;
         text-align: center;
-        background-color: rgb(62, 120, 255);
+        @include background_color("theme_color");
         border-radius: 4px;
         color: #e6e6e6;
       }
@@ -229,6 +228,10 @@ let changeTheMode = () => {
         cursor: pointer;
         z-index: 1;
       }
+    }
+
+    .dark-mode {
+      background-color: #e6e6e6;
     }
 
   }
@@ -254,6 +257,7 @@ let changeTheMode = () => {
     }
 
     .collapse-menu {
+      @include font_color("font_color1");
       display: flex;
       flex-shrink: 0;
     }
@@ -264,7 +268,7 @@ let changeTheMode = () => {
       align-items: center;
       position: absolute;
       top: 60px;
-      background-color: #ffffff;
+      @include background_color("background_color1");
       border-radius: 4px;
       width: 110px;
       z-index: 1;
@@ -275,7 +279,7 @@ let changeTheMode = () => {
       border-top: 1px solid #e6e6e6;
       height: 40px;
       line-height: 40px;
-      color: rgb(42, 42, 42);
+      @include font_color("font_color1");
     }
 
 

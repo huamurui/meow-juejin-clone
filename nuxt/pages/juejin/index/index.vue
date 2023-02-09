@@ -16,7 +16,10 @@ import Aside from './Aside/index.vue'
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/main.scss";
+
 main {
+  @include background_color("background_color1");
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-areas: "feed aside";

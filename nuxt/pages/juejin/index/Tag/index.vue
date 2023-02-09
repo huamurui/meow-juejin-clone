@@ -46,6 +46,8 @@ const setTag = (index: number) => {
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/main.scss";
+
 .select {
   margin-top: 60px;
 
@@ -53,26 +55,29 @@ const setTag = (index: number) => {
     display: flex;
     flex-wrap: wrap;
     padding: 0 20px;
+    @include background_color("background_color1");
 
     .category-item {
       display: inline-block;
       padding: 5px 10px;
       margin: 5px;
-      color: #666;
+      @include font_color("font_color2");
+
       cursor: pointer;
 
       &:hover {
-        color: #333;
+        @include font_color("font_color1");
       }
 
       &.active {
-        color: #334bff;
+        font-weight: 600;
+        @include font_color("theme_color");
       }
     }
   }
 
   .tag {
-    background-color: #eee;
+    @include background_color("background_color2");
     display: flex;
     flex-wrap: wrap;
     padding: 0 20px;
@@ -82,7 +87,7 @@ const setTag = (index: number) => {
       padding: 5px 10px;
       margin: 5px;
       color: #666;
-      background-color: #fff;
+      @include background_color("background_color1");
       border: #666;
       border-radius: 99999px;
       cursor: pointer;
@@ -92,8 +97,8 @@ const setTag = (index: number) => {
       }
 
       &.active {
-        color: #fff;
-        background-color: #4e89ff;
+        @include font_color("font_color1");
+        @include background_color("theme_color");
       }
     }
   }
