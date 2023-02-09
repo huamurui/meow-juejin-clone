@@ -14,7 +14,7 @@ const plugins = [
 ]
 
 export default {
-  components: { Editor, Viewer },
+  components: { Editor, Viewer, toc },
   props: {
     value: {
       type: String,

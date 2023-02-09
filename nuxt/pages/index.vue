@@ -11,6 +11,7 @@
     <div @click="change">
       switch theme
     </div>
+    ps : 注意看滚动条
   </div>
 </template>
 
@@ -29,9 +30,9 @@ useHead({
 let circle = ref(0)
 const change = () => {
   if (circle.value === 0) {
-    window.document.documentElement.setAttribute("data-theme", 'meow');
+    window.document.documentElement.setAttribute("data-theme", 'dark-meow');
   } else {
-    window.document.documentElement.setAttribute("data-theme", 'light');
+    window.document.documentElement.setAttribute("data-theme", 'light-juejin');
   }
   circle.value = circle.value === 0 ? 1 : 0
 }
@@ -40,12 +41,14 @@ const change = () => {
 <style scoped lang="scss">
 @import "~/assets/css/handle";
 
+
 .emmmm {
-  p {
-    font-size: 18px;
-    @include font_color("font_color1");
-    @include background_color("background_color1");
-    @include border_color("border_color1");
-  }
+  height: 110vh;
+
+  font-size: 18px;
+  @include font_color("font_color1");
+  @include background_color("background_color1");
+  @include border_color("border_color1");
+
 }
 </style>

@@ -1,3 +1,6 @@
+@import "~/assets/css/handle";
+
+
 // 清除默认样式
 body {
   margin: 0;
@@ -5,3 +8,21 @@ body {
 }
 
 // 选取主题色
+
+
+
+
+// 滚动条美化
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb {
+  @include background_color('theme_color');
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffec20;
+}

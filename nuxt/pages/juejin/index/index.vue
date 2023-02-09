@@ -1,7 +1,7 @@
 <template>
   <Header class="header"></Header>
   <Tag></Tag>
-  <main>
+  <main class="content">
     <Feed class="feed"></Feed>
     <Aside class="aside"></Aside>
   </main>
@@ -15,40 +15,38 @@ import Aside from './Aside/index.vue'
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 main {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-area: "feed" "aside";
+  grid-template-areas: "feed aside";
+
   /* justify-content: center; */
-}
-
-.feed {
-  grid-area: "feed";
-  margin-left: 200px;
-}
-
-.aside {
-  grid-area: "aside";
-  margin-right: 100px;
-}
-
-@media screen and (max-width: 768px) {
-
-  main {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 80vw;
-    grid-area: "feed";
-  }
-
   .feed {
-    grid-area: "feed";
-    margin-left: 0;
+
+    margin-left: 200px;
   }
 
   .aside {
-    display: none;
+    margin-right: 100px;
+  }
+
+  @media screen and (max-width: 1000px) {
+
+    .feed {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .aside {
+      display: none;
+      margin-right: 0;
+    }
+
+    main {
+      display: inline;
+    }
+
   }
 }
 </style>

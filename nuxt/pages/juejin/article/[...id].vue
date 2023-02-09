@@ -6,6 +6,7 @@
     </a>
     <p>route id: {{ $route.params.id[0] }}</p>
     <Bytemd :value="re.data.attributes.content" />
+    <div class="toc"></div>
   </div>
 </template>
 
@@ -22,5 +23,5 @@ const re = await findOne<Article>('articles', id[0])
 </script>
 
 <style scoped>
-
+.toc {}
 </style>
