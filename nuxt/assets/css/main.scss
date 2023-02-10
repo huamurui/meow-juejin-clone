@@ -20,6 +20,7 @@ body {
   @include background_color("background_color1");
 }
 ::-webkit-scrollbar-thumb {
+  background-color: black;
   @include background_color('theme_color');
   border-radius: 9999px;
 }
