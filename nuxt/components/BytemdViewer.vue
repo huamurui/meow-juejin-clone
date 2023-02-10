@@ -1,16 +1,14 @@
 <template>
   <div>
-    <!-- <Editor :value="markdowns" :plugins="plugins" @change="handleChange" /> -->
-
     <div class="view">
       <div class="content">
         <Viewer :value="markdowns" :plugins="plugins" />
       </div>
       <div class="toc">
         <div v-for="(item, index) in toc" :key="index">
-          <div :href="'#' + item.slug" class="toc-item" :class="{ active: isToc === index }" @click="setToc(index)">{{
-            item.title
-          }}</div>
+          <div :href="'#' + item.slug" class="toc-item" :class="{ active: isToc === index }" @click="setToc(index)">
+            {{ item.title }}
+          </div>
         </div>
       </div>
     </div>
@@ -18,11 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import 'bytemd/dist/index.css'
 import gfm from '@bytemd/plugin-gfm'
 import { getProcessor } from 'bytemd'
-import { Editor, Viewer } from '@bytemd/vue-next'
-
+import { Viewer } from '@bytemd/vue-next'
+// https://github.com/xitu/juejin-markdown-themes
 
 const plugins = [
   gfm(),
@@ -116,10 +113,13 @@ const setToc = (index: number) => {
 
   .toc {
     position: sticky;
-    top: 0px;
+    top: 120px;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
+    width: 200px;
+    height: 500px;
+    // 貌似是必须要有width 和 height 最上面那个 position: sticky 才能生效
 
     .toc-item {
       display: block;

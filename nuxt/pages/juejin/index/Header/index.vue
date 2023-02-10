@@ -30,9 +30,12 @@
 
     <div class="user">
       <div class="post">
-        <div class="post-button" to="/juejin">
-          创作者中心
-        </div>
+        <NuxtLink :to="`/juejin/write`">
+          <div class="post-button">
+            创作者中心
+          </div>
+        </NuxtLink>
+
         <!-- <div class="post-icon" to="/juejin">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"
             class="active unfold12-icon" data-v-014d2bb2="">

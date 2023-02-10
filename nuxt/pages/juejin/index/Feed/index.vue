@@ -22,9 +22,9 @@
               <div class="article-desc">
                 {{ article.attributes.content }}
               </div>
-              <div v-if="article.attributes.cover != null" class="article-cover">
-                <img :src="article.attributes.cover" alt="">
-              </div>
+              <!-- <div v-if="article.attributes.cover != null" class="article-cover">
+                <img :src="article.attributes.cover.data.attributes.url" alt="">
+              </div> -->
             </div>
 
             <div class="article-operation">
@@ -73,7 +73,7 @@ interface Article {
   title: string
   content: string
   author: string
-  cover: string | null
+  cover: string
 }
 interface Author {
   name: string
@@ -82,10 +82,10 @@ interface Author {
 const { find } = useStrapi()
 
 const response = await find<Article>('articles', {
-  populate: ['author'],
+  populate: ['author', 'cover'],
   //这样只有一层的关系能被查出来...
 })
-
+console.log(response)
 </script>
 
 <style lang="scss" scoped>

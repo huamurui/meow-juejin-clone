@@ -12,7 +12,6 @@ import Header from './Header/index.vue'
 import Tag from './Tag/index.vue'
 import Feed from './Feed/index.vue'
 import Aside from './Aside/index.vue'
-
 </script>
 
 <style lang="scss" scoped>

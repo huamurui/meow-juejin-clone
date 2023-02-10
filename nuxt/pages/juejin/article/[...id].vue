@@ -1,17 +1,15 @@
 <template>
   <div>
-    <a href="https://juejin.cn" target="_blank">
-      <img src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e08da34488b114bd4c665ba2fa520a31.svg"
-        alt="掘金" />
-    </a>
-
+    <Header></Header>
     <div>
-      <Bytemd :markdowns="re.data.attributes.content" />
+      <BytemdViewer :markdowns="re.data.attributes.content" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import Header from "../index/Header/index.vue"
+
 interface Article {
   title: string
   content: string

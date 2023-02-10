@@ -1,21 +1,26 @@
 <template>
+
   <NuxtLink to="/juejin">Juejin Clone</NuxtLink> <a>← click here...比较惨不忍睹...可以的话，自己把样式重写一遍也可以</a>
-  <h1>hello scss</h1>
-  <div class="emmmm">
-    <div>emmmm</div>
-    <p>SCSS 有什么小的基础的，还有效果的语法吗</p>
-    <p>yarn add sass --dev...就这一下就可以在模板里用scss了</p>
-    <p>超，tailwind 你个折磨人的你看看人家</p>
-
-
-    <div @click="change">
-      switch theme
-    </div>
-    ps : 注意看滚动条
-  </div>
+  <NuxtLayout name="nondefault">
+    <template #header>
+      this is header
+    </template>
+    <template #content>
+      this is content
+    </template>
+    <template #aside>
+      this is aside
+    </template>
+  </NuxtLayout>
 </template>
 
+
 <script setup lang="ts">
+definePageMeta({
+  layout: false
+});
+
+
 useHead({
   title: 'meow 掘金',
   meta: [
@@ -26,16 +31,6 @@ useHead({
   },
   script: [{ children: 'console.log(\'Hello world\')' }]
 })
-
-let circle = ref(0)
-const change = () => {
-  if (circle.value === 0) {
-    window.document.documentElement.setAttribute("data-theme", 'dark-meow');
-  } else {
-    window.document.documentElement.setAttribute("data-theme", 'light-juejin');
-  }
-  circle.value = circle.value === 0 ? 1 : 0
-}
 </script>
 
 <style scoped lang="scss">
