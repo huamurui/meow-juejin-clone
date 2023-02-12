@@ -6,7 +6,10 @@
       </div>
       <div class="toc">
         <div v-for="(item, index) in toc" :key="index">
-          <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">{{ item.title }}
+          <div class="toc-item"
+            :style="{ marginLeft: item.level * 10 + 'px', color: isToc === index ? '#2d6fff' : '#666' }"
+            @click="setToc(index)">
+            {{ item.title }}
           </div>
         </div>
       </div>
@@ -52,8 +55,6 @@ onBeforeMount(() => {
 const setToc = (index: number) => {
   isToc.value = index
   const el = htable[index]
-  console.log(toc[0].title)
-  console.log(el)
   if (el) {
     el.scrollIntoView()
   }
