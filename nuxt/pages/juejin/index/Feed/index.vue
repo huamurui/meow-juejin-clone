@@ -22,9 +22,11 @@
               <div class="article-desc">
                 {{ article.attributes.content }}
               </div>
-              <!-- <div v-if="article.attributes.cover != null" class="article-cover">
-                <img :src="article.attributes.cover.data.attributes.url" alt="">
-              </div> -->
+
+              <div v-show="article.attributes.cover != null" class="article-cover">
+                <img style="width: 200px; height: 100px;"
+                  :src="`http://localhost:1337${article.attributes.cover.data.attributes.url}`" alt="">
+              </div>
             </div>
 
             <div class="article-operation">
@@ -75,6 +77,8 @@ interface Article {
   author: string
   cover: string
 }
+
+
 interface Author {
   name: string
   avatar: string | null
@@ -98,6 +102,7 @@ console.log(response)
   padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
+  max-width: 720px;
   @include background_color("background_color2");
   box-shadow: 0 0 10px 0 rgba(128, 128, 128, 0.1);
 
@@ -108,21 +113,28 @@ console.log(response)
   }
 
   .article-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: 1fr 3fr;
+    grid-template-areas:
+      "article-title article-cover"
+      "article-desc article-cover";
     max-width: 700px;
     word-break: break-all;
-    height: 100%;
+    height: 100px;
 
     .article-title {
+      grid-area: article-title;
       font-size: 16px;
       font-weight: 800;
+      @include ellipsis(1);
       @include font_color("font_color2");
       margin-bottom: 10px;
     }
 
     .article-desc {
+      grid-area: article-desc;
+      @include ellipsis(3);
       font-size: 14px;
       color: #666;
       line-height: 1.5;
@@ -130,8 +142,9 @@ console.log(response)
     }
 
     .article-cover {
-      width: 100%;
-      height: 100%;
+      grid-area: article-cover;
+      width: 200px;
+      height: 100px;
       object-fit: cover;
     }
   }

@@ -6,8 +6,7 @@
       </div>
       <div class="toc">
         <div v-for="(item, index) in toc" :key="index">
-          <div :href="'#' + item.slug" class="toc-item" :class="{ active: isToc === index }" @click="setToc(index)">
-            {{ item.title }}
+          <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">{{ item.title }}
           </div>
         </div>
       </div>
@@ -17,8 +16,11 @@
 
 <script setup lang="ts">
 import gfm from '@bytemd/plugin-gfm'
-import { getProcessor } from 'bytemd'
+// import { getProcessor } from 'bytemd'
 import { Viewer } from '@bytemd/vue-next'
+import { defineProps, onMounted, onBeforeMount, ref } from 'vue'
+
+
 // https://github.com/xitu/juejin-markdown-themes
 
 const plugins = [
@@ -29,71 +31,32 @@ const props = defineProps<{
   markdowns: string
 }>()
 
-const handleChange = (value: string) => {
-  console.log(value)
-}
 
-// https://github.com/bytedance/bytemd/issues/33
-let hast: any
-getProcessor({
-  plugins: [
-    {
-      rehype: (p) =>
-        p.use(() => (tree: any) => {
-          hast = tree
-        }),
-    },
-  ],
-}).processSync(props.markdowns);
-
-// console.log(hast) // h1-h6 is what you want
-
+// 我竟然自己写了一个 toc 和滚动！！！！！
+// get h1-h6
+let htable: any = []
 let toc: any = []
-const getToc = (hast: any) => {
-  hast.children.forEach((item: any) => {
-    if (item.tagName === 'h1') {
-      toc.push({
-        level: 1,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    } else if (item.tagName === 'h2') {
-      toc.push({
-        level: 2,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    } else if (item.tagName === 'h3') {
-      toc.push({
-        level: 3,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    } else if (item.tagName === 'h4') {
-      toc.push({
-        level: 4,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    } else if (item.tagName === 'h5') {
-      toc.push({
-        level: 5,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    } else if (item.tagName === 'h6') {
-      toc.push({
-        level: 6,
-        title: item.children[0].value,
-        slug: item.properties.id
-      })
-    }
-  })
-}
-getToc(hast)
 let isToc = ref(0)
+onBeforeMount(() => {
+  htable = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+  htable.forEach((item: any, index: number) => {
+    toc.push({
+      level: item.tagName.slice(1),
+      title: item.innerText,
+      index: index
+    })
+  })
+  console.log(toc)
+
+})
 const setToc = (index: number) => {
   isToc.value = index
+  const el = htable[index]
+  console.log(toc[0].title)
+  console.log(el)
+  if (el) {
+    el.scrollIntoView()
+  }
 }
 </script>
 

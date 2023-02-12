@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header></Header>
+    <JuejinHeader></JuejinHeader>
     <div>
       <BytemdViewer :markdowns="re.data.attributes.content" />
     </div>
@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import Header from "../index/Header/index.vue"
 
 interface Article {
   title: string

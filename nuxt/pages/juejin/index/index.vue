@@ -1,5 +1,5 @@
 <template>
-  <Header class="header"></Header>
+  <JuejinHeader class="header"></JuejinHeader>
   <Tag></Tag>
   <main class="content">
     <Feed class="feed"></Feed>
@@ -8,10 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import Header from './Header/index.vue'
 import Tag from './Tag/index.vue'
 import Feed from './Feed/index.vue'
 import Aside from './Aside/index.vue'
+
+definePageMeta({
+  layout: false
+});
+
 </script>
 
 <style lang="scss" scoped>
