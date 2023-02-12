@@ -53,7 +53,9 @@ const setTag = (index: number) => {
 
   .category {
     display: flex;
-    flex-wrap: wrap;
+    white-space: nowrap;
+    flex-shrink: 0;
+    overflow: auto;
     padding: 0 20px;
     @include background_color("background_color1");
 

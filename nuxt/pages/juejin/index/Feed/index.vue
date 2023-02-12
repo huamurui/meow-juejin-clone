@@ -89,20 +89,23 @@ const response = await find<Article>('articles', {
   populate: ['author', 'cover'],
   //这样只有一层的关系能被查出来...
 })
-console.log(response)
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/css/main.scss";
+
+.article-list {
+  display: grid;
+}
 
 .article-pre {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
+  align-self: center;
   box-sizing: border-box;
   border-radius: 10px;
-  max-width: 720px;
   @include background_color("background_color2");
   box-shadow: 0 0 10px 0 rgba(128, 128, 128, 0.1);
 

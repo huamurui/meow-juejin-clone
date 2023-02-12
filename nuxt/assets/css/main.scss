@@ -15,6 +15,8 @@ body {
 // 滚动条美化
 ::-webkit-scrollbar {
   width: 0.5rem;
+  height: 0.5rem;
+  // 横竖是两种滚动条的宽度...
 }
 ::-webkit-scrollbar-track {
   @include background_color("background_color1");

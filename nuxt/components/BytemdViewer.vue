@@ -36,11 +36,13 @@ const props = defineProps<{
 
 
 // 我竟然自己写了一个 toc 和滚动！！！！！
+// 如何解决数据更新后，页面不更新的问题...现在是必须刷新或者..笨蛋，用reactive包一下就ojbk的事...然后配合onMounted。啊...vue真好用。
 // get h1-h6
 let htable: any = []
-let toc: any = []
+let toc: any = reactive([])
 let isToc = ref(0)
-onBeforeMount(() => {
+
+onMounted(() => {
   htable = document.querySelectorAll('h1, h2, h3, h4, h5, h6')
   htable.forEach((item: any, index: number) => {
     toc.push({
@@ -49,20 +51,26 @@ onBeforeMount(() => {
       index: index
     })
   })
-  console.log(toc)
-
 })
+
 const setToc = (index: number) => {
   isToc.value = index
   const el = htable[index]
   if (el) {
-    el.scrollIntoView()
+    el.scrollIntoView(
+      {
+        behavior: "smooth",  // 平滑过渡
+        block: "start"    // 上边框与视窗顶部平齐
+      }
+    )
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+@import "~/assets/css/main.scss";
+
 .view {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -70,7 +78,8 @@ const setToc = (index: number) => {
   margin-top: 20px;
 
   .content {
-    background-color: #fff;
+    @include font_color("font_color1");
+    @include background_color("background_color1");
     padding: 20px;
     border-radius: 5px;
   }
@@ -78,7 +87,7 @@ const setToc = (index: number) => {
   .toc {
     position: sticky;
     top: 120px;
-    background-color: #fff;
+    @include background_color("background_color1");
     padding: 20px;
     border-radius: 5px;
     width: 200px;
@@ -90,10 +99,6 @@ const setToc = (index: number) => {
       padding: 5px 10px;
       color: #666;
       cursor: pointer;
-
-      &.active {
-        color: #2d6fff;
-      }
     }
   }
 }

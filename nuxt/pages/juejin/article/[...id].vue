@@ -1,7 +1,7 @@
 <template>
   <div>
     <JuejinHeader></JuejinHeader>
-    <div>
+    <div class="content">
       <BytemdViewer :markdowns="re.data.attributes.content" />
     </div>
   </div>
