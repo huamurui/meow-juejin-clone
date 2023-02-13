@@ -18,11 +18,13 @@
 </template>
 
 <script setup lang="ts">
-import gfm from '@bytemd/plugin-gfm'
-// import { getProcessor } from 'bytemd'
-import { Viewer } from '@bytemd/vue-next'
 import { onMounted, ref } from 'vue'
 
+import gfm from '@bytemd/plugin-gfm'
+import { Viewer } from '@bytemd/vue-next'
+import 'bytemd/dist/index.css'
+
+// https://github.com/bytedance/bytemd/issues/126
 
 // https://github.com/xitu/juejin-markdown-themes
 
@@ -34,9 +36,6 @@ const props = defineProps<{
   markdowns: string
 }>()
 
-
-// 我竟然自己写了一个 toc 和滚动！！！！！
-// 如何解决数据更新后，页面不更新的问题...现在是必须刷新或者..笨蛋，用reactive包一下就ojbk的事...然后配合onMounted。啊...vue真好用。
 // get h1-h6
 let htable: any = []
 let toc: any = reactive([])

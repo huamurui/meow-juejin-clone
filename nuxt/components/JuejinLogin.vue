@@ -3,11 +3,11 @@
     <form class="login-form">
       <div class="login-form-item">
         <label for="username">用户名</label>
-        <input type="text" id="username" v-model="username" />
+        <input type="text" id="username" v-model="loginData.identifier" />
       </div>
       <div class="login-form-item">
         <label for="password">密码</label>
-        <input type="password" id="password" v-model="password" />
+        <input type="password" id="password" v-model="loginData.password" />
       </div>
       <div class="login-form-item">
         <div type="button" @click="useLogin">登录</div>
@@ -21,26 +21,21 @@
 
 <script setup lang="ts">
 
-let username = ref("")
-let password = ref("")
+let loginData = reactive({ identifier: "", password: "" })
 
-const { login } = useStrapiAuth()
+const { login, logout } = useStrapiAuth()
 
 const useLogin = async () => {
   try {
-    let a = await login({ identifier: username.value, password: password.value })
-
+    let a = await login(loginData)
     console.log(a)
-
-    localStorage.setItem("user_token", a.jwt);
-    // LocalStorage 并不安全！！！。。httpOnly Cookie 更好。
-
-  } catch (e) { }
+  } catch (e) {
+    console.log(e)
+  }
 }
-const { logout } = useStrapiAuth()
+
 const useLogout = async () => {
   logout()
-  localStorage.removeItem("user_token");
 }
 
 </script>

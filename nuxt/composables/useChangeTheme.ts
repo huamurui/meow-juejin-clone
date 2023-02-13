@@ -1,5 +1,9 @@
+
+  // only run in client (browser)
+
 let circle:any = ref(false)
 //...神经病吧这里也写 any...
+// if (!import.meta.env.SSR) 
 let theme = localStorage.getItem('theme')
 
 const setLight= ()=>{ 

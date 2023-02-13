@@ -2,7 +2,7 @@
   <JuejinHeader class="header"></JuejinHeader>
   <Tag class="tags"></Tag>
   <main class="content">
-    <Feed class="feed"></Feed>
+    <JuejinFeedArticles class="feed"></JuejinFeedArticles>
     <JuejinAside class="aside"></JuejinAside>
   </main>
 </template>
