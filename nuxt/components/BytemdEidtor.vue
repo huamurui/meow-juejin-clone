@@ -1,6 +1,11 @@
 <template>
   <div>
-    <Editor class="size" :value="markdowns" :plugins="plugins" @change="handleChange" />
+    <div class="title-text">标题</div>
+    <div class="title-input">
+      <input type="text" v-model="article.title" />
+    </div>
+    <Editor class="size" :value="article.content" :plugins="plugins" @change="handleChange" />
+    <div @click="onSubmit">提交</div>
   </div>
 </template>
 
@@ -20,11 +25,28 @@ const plugins = [
 //   props.markdowns = value
 // }
 
-let markdowns = ref("")
+interface Article {
+  title: string
+  content: string
+  author: string
+}
+const user = useStrapiUser()
+
+let article = reactive({
+  title: "",
+  content: "",
+  author: user
+})
 const handleChange = (value: string) => {
-  markdowns.value = value
+  article.content = value
 }
 
+
+const { create } = useStrapi()
+
+const onSubmit = async () => {
+  await create<Article>('articles', article)
+}
 </script>
 
 <style scoped>

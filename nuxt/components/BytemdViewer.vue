@@ -21,7 +21,7 @@
 import gfm from '@bytemd/plugin-gfm'
 // import { getProcessor } from 'bytemd'
 import { Viewer } from '@bytemd/vue-next'
-import { defineProps, onMounted, onBeforeMount, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 
 // https://github.com/xitu/juejin-markdown-themes

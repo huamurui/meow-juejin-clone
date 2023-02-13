@@ -14,7 +14,6 @@ import Feed from './Feed/index.vue'
 definePageMeta({
   layout: false
 });
-useChangeTheme()
 
 </script>
 
