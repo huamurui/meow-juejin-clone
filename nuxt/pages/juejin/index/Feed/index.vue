@@ -11,7 +11,7 @@
                 <span>{{ article.attributes.author.data.attributes.username }}</span>
               </div>
               <div class="article-time">
-                {{ article.attributes.createdAt }} · {{ article.attributes.readingTime }}
+                {{ article.attributes.createdAt }}
               </div>
             </div>
 
@@ -23,7 +23,7 @@
                 {{ article.attributes.content }}
               </div>
 
-              <div v-show="article.attributes.cover != null" class="article-cover">
+              <div v-if="article.attributes.cover.data != null" class="article-cover">
                 <img style="width: 200px; height: 100px;"
                   :src="`http://localhost:1337${article.attributes.cover.data.attributes.url}`" alt="">
               </div>
@@ -74,8 +74,10 @@
 interface Article {
   title: string
   content: string
-  author: string
-  cover: string
+  author: any
+  cover: any
+  createdAt: string
+  readingTime: number
 }
 
 

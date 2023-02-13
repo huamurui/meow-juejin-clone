@@ -18,17 +18,12 @@ const plugins = [
   gfm(),
   // Add more plugins here
 ]
-// const props = defineProps<{
-//   markdowns: string
-// }>()
-// const handleChange = (value: string) => {
-//   props.markdowns = value
-// }
+
 
 interface Article {
   title: string
   content: string
-  author: string
+  author: any
 }
 const user = useStrapiUser()
 
