@@ -101,4 +101,14 @@ const setToc = (index: number) => {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .view {
+    grid-template-columns: 1fr;
+  }
+
+  .toc {
+    display: none;
+  }
+}
 </style>

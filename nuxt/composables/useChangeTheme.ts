@@ -28,13 +28,10 @@ if (theme === 'dark-meow') {
 }
 // 我需要全局的执行这些代码...
 const useChangeTheme = () => {
-  console.log('useChangeTheme')
   if (theme === 'light-juejin') {
     setDark()
-    console.log('useChangeTheme-light-juejin')
   } 
   if (theme === 'dark-meow') {
-    console.log('useChangeTheme-dark-meow')
     setLight()
   }
 

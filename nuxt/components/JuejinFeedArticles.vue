@@ -6,8 +6,6 @@
           <div class="article-pre">
             <div class="article-info">
               <div class="article-author">
-                <img style="width:36px;height:36px;border-radius: 9999px;" src="https://huamurui.github.io/logo.svg"
-                  alt="huamurui">
                 <span>{{ article.attributes.author.data.attributes.username }}</span>
               </div>
               <div class="article-time">
@@ -15,12 +13,14 @@
               </div>
             </div>
 
-            <div class="article-content">
-              <div class="article-title">
-                <a>{{ article.attributes.title }}</a>
-              </div>
-              <div class="article-desc">
-                {{ article.attributes.content }}
+            <div class="article-main">
+              <div class="article-content">
+                <div class="article-title">
+                  <a>{{ article.attributes.title }}</a>
+                </div>
+                <div class="article-desc">
+                  {{ article.attributes.content }}
+                </div>
               </div>
 
               <div v-if="article.attributes.cover.data != null" class="article-cover">
@@ -117,40 +117,38 @@ const response = await find<Article>('articles', {
     justify-content: space-between;
   }
 
-  .article-content {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    grid-template-rows: 1fr 3fr;
-    grid-template-areas:
-      "article-title article-cover"
-      "article-desc article-cover";
-    max-width: 700px;
-    word-break: break-all;
-    height: 100px;
+  .article-main {
+    display: flex;
+    flex-direction: row;
 
-    .article-title {
-      grid-area: article-title;
-      font-size: 16px;
-      font-weight: 800;
-      @include ellipsis(1);
-      @include font_color("font_color2");
-      margin-bottom: 10px;
-    }
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 20px;
 
-    .article-desc {
-      grid-area: article-desc;
-      @include ellipsis(3);
-      font-size: 14px;
-      color: #666;
-      line-height: 1.5;
-      margin-bottom: 10px;
+      .article-title {
+        @include font_color("font_color2");
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .article-desc {
+        @include font_color("font_color2");
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        @include ellipsis(2);
+      }
+
+
     }
 
     .article-cover {
-      grid-area: article-cover;
-      width: 200px;
-      height: 100px;
-      object-fit: cover;
+      margin-top: 20px;
+      border-radius: 10px;
     }
   }
 
