@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <JuejinFeedMoments></JuejinFeedMoments>
   </div>
 </template>
 

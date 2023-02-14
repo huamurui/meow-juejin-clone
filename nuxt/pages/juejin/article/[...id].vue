@@ -14,11 +14,6 @@
 
 <script setup lang="ts">
 
-interface Article {
-  title: string
-  content: string
-  author: string
-}
 const { findOne } = useStrapi()
 const route = useRoute()
 const id = route.params.id as string[]

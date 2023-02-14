@@ -21,15 +21,6 @@
 
 <script setup lang="ts">
 
-interface Category {
-  categoryName: string
-  id: number
-}
-
-interface Tag {
-  tagName: string
-  id: number
-}
 
 const { find } = useStrapi()
 const res0 = await find<Category>('categories')

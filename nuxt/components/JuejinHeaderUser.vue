@@ -2,7 +2,13 @@
   <div>
 
     <div class="user">
-
+      <div class="post">
+        <NuxtLink :to="`/juejin/write`">
+          <div class="post-button">
+            创作者中心
+          </div>
+        </NuxtLink>
+      </div>
       <div class="notice">
         <NuxtLink to="/juejin">
           <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +63,6 @@
 @import "~/assets/css/main.scss";
 
 .user {
-  width: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -77,36 +82,39 @@
     }
   }
 
+}
 
 
+.personal {
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  @include background_color("background_color1");
 
-  .personal {
+  .dark-mode {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    border-radius: 50%;
+    cursor: pointer;
 
-    .dark-mode {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      margin-right: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-
-      svg {
-        width: 20px;
-        height: 20px;
-        // fill: $color-black;
-      }
+    svg {
+      width: 20px;
+      height: 20px;
+      // @include background_color("theme-color");
+      // fill: $color-black;
     }
+  }
 
-    .user-img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+  .user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
   }
 }
 </style>

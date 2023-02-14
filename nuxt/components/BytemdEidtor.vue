@@ -18,13 +18,6 @@ const plugins = [
   gfm(),
   // Add more plugins here
 ]
-
-
-interface Article {
-  title: string
-  content: string
-  author: any
-}
 const user = useStrapiUser()
 
 let article = reactive({

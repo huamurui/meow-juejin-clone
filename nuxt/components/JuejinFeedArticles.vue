@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="article-list">
-      <div v-for="(article, index) in response.data" :key="index">
+      <div v-for="(article, index) in articles" :key="index">
         <NuxtLink :to="`/juejin/article/${article.id}`">
           <div class="article-pre">
             <div class="article-info">
@@ -71,26 +71,9 @@
 </template>
 
 <script setup lang="ts">
-interface Article {
-  title: string
-  content: string
-  author: any
-  cover: any
-  createdAt: string
-  readingTime: number
-}
-
-
-interface Author {
-  name: string
-  avatar: string | null
-}
-const { find } = useStrapi()
-
-const response = await find<Article>('articles', {
-  populate: ['author', 'cover'],
-  //这样只有一层的关系能被查出来...
-})
+defineProps<{
+  articles: any;
+}>();
 </script>
 
 <style lang="scss" scoped>
