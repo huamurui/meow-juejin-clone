@@ -21,3 +21,10 @@ interface Tag {
   tagName: string
   id: number
 }
+interface Person {
+  username: string
+  avatar: any
+  id: number
+  articles: Article[]
+  moments: Moment[]
+}
