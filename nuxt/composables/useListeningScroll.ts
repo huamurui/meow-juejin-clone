@@ -8,7 +8,7 @@ const useListeningScroll = () => {
     } 
     if(window.scrollY  < 60) {
 
-      // 这里怎么写？
+      // 这里怎么写？...也许不应该看距离而是加个时间防抖。
       scrollUp.value = false
       scrollDown.value = true
     }

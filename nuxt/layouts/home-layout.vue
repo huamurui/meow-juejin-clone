@@ -25,8 +25,12 @@
 <style lang="scss" scoped>
 @import "~/assets/css/main.scss";
 
+.home-page {
+  @include background_color("background_color2");
+}
+
 main {
-  @include background_color("background_color1");
+  @include background_color("background_color2");
 
   display: flex;
   justify-content: space-between;

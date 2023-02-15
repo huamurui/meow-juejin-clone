@@ -91,7 +91,7 @@ defineProps<{
   align-self: center;
   box-sizing: border-box;
   border-radius: 10px;
-  @include background_color("background_color2");
+  @include background_color("background_color1");
   box-shadow: 0 0 10px 0 rgba(128, 128, 128, 0.1);
 
   .article-info {

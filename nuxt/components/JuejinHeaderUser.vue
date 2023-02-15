@@ -27,9 +27,7 @@
         </NuxtLink>
       </div>
       <div class="personal">
-        <NuxtLink to="/juejin">
-          <img class="personal-img" scr="/nuxt/public/favicon.ico" />
-        </NuxtLink>
+        <JuejinLogin></JuejinLogin>
       </div>
       <ClientOnly>
         <!-- 此处是客户端渲染的内容...为什么一个改主题的玩意都要这样包起来？...你去看看就知道了。我也不知道怎么搞好，那就这样整好了 -->
@@ -56,6 +54,7 @@
 </template>
 
 <script setup lang="ts">
+
 
 </script>
 
