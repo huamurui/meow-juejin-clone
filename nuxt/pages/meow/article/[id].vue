@@ -1,15 +1,15 @@
 <template>
   <div>
-    <JuejinHeader></JuejinHeader>
+    <MeowJuejinHeader></MeowJuejinHeader>
     <div class="content">
-      <BytemdViewer :markdowns="re.data.attributes.content" />
+      <MeowBytemdViewer :markdowns="re.data.attributes.content" />
       <div class="action-bar">
         <div class="action-approve">↑</div>
         <div class="action-comment">talk</div>
         <div class="action-collect">star</div>
       </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script setup lang="ts">

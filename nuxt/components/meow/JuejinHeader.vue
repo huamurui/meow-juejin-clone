@@ -1,11 +1,11 @@
 <template>
   <header class="header">
-    <JuejinHeaderNav />
+    <MeowJuejinHeaderNav />
 
-    <JuejinHeaderSearch />
+    <MeowJuejinHeaderSearch />
 
-    <JuejinHeaderUser />
-  </header>
+    <MeowJuejinHeaderUser />
+</header>
 </template>
 
 <script setup lang="ts">

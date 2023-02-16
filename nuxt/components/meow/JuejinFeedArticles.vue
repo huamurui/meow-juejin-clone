@@ -2,7 +2,7 @@
   <div>
     <div class="article-list">
       <div v-for="(article, index) in articles" :key="index">
-        <NuxtLink :to="`/juejin/article/${article.id}`">
+        <NuxtLink :to="`/meow/article/${article.id}`">
           <div class="article-pre">
             <div class="article-info">
               <div class="article-author">
@@ -67,7 +67,7 @@
         </NuxtLink>
       </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script setup lang="ts">

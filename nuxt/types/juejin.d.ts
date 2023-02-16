@@ -22,9 +22,12 @@ interface Tag {
   id: number
 }
 interface Person {
-  username: string
-  avatar: any
   id: number
+  username: string
+
+  avatar: any
+  email: string
+
   articles: Article[]
   moments: Moment[]
 }
