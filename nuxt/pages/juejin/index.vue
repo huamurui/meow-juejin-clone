@@ -1,17 +1,18 @@
 <template>
-  <div>
+  <div class="juejin">
     <NuxtLayout name="juejin-index">
       <template #header>
         <JuejinHeader></JuejinHeader>
+        <JuejinHeaderTag></JuejinHeaderTag>
       </template>
-      <template #feed>
+      <template #content>
         <JuejinFeed :articles="response.data"></JuejinFeed>
       </template>
       <template #aside>
         <JuejinAside></JuejinAside>
       </template>
     </NuxtLayout>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +22,13 @@ const response = await find<Article>('articles', {
   populate: ['author', 'cover'],
 })
 
-
 </script>
 
-<style class="scss" scoped></style>
+<style lang="scss" scoped>
+@import "~/assets/css/handle";
+
+* {
+  @include font_color("font_color1");
+  @include background_color("background_color1");
+}
+</style>

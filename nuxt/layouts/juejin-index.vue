@@ -1,19 +1,19 @@
 <template>
-  <div>
+  <div class="juejin">
     <header>
       <slot name="header"></slot>
     </header>
     <main>
       <div class="container">
         <div class="content">
-          <slot name="content"></slot>
+          <slot name="content">feed</slot>
         </div>
         <div class="aside">
           <slot name="aside"></slot>
         </div>
       </div>
     </main>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -21,6 +21,10 @@
 </script>
 
 <style lang="scss" scoped>
+.juejin {
+  background-color: #eee;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -31,7 +35,6 @@
   .content {
     width: 100%;
     max-width: 780px;
-    background-color: aquamarine;
 
     .item {
       width: 100%;

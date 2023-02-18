@@ -24,18 +24,18 @@
         </div>
       </div>
     </aside>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
 const authors = [
   {
     info: '张三',
-    avatar: 'https://s'
+    avatar: 'http://huamurui.github.io/logo.svg'
   },
   {
     info: '张三',
-    avatar: 'https://s'
+    avatar: 'http://huamurui.github.io/logo.svg'
   }
 ]
 </script>

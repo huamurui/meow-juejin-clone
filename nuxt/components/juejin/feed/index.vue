@@ -2,26 +2,31 @@
   <div>
     <main>
       <div class="content">
-        <div class="content-item" v-for="(article, index) in articles">
-
-          <div class="item-info">
-            {{ article.author.attributes.username }}
-          </div>
-          <div class="item-pre">
-            {{ article.attributes.content }}
-          </div>
-          <div class="item-footer">
-            {{ article.attributes.createdAt }}
-          </div>
-
+        <div class="content-item" v-for="(article, index) in articles" :key="index">
+          <NuxtLink :to="`/juejin/article/${article.id}`" class="content-main">
+            <div class="item-info">
+              {{ article.attributes.author.data.attributes.username }} 发布于
+              {{ article.attributes.createdAt }}
+            </div>
+            <div class="item-pre">
+              <div class="item-title">
+                {{ article.attributes.title }}
+              </div>
+              <div class="item-desc">
+                {{ article.attributes.content }}
+              </div>
+            </div>
+            <div class="item-footer">
+              action bar
+            </div>
+          </NuxtLink>
           <div v-if="article.attributes.cover.data != null" class="article-cover">
-            <img style="width: 200px; height: 100px;"
-              :src="`http://localhost:1337${article.attributes.cover.data.attributes.url}`" alt="">
+            <img :src="`http://localhost:1337${article.attributes.cover.data.attributes.url}`" alt="">
           </div>
         </div>
       </div>
     </main>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +37,8 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/handle";
+
 main {
 
 
@@ -42,27 +49,54 @@ main {
 
 
     .content-item {
-      margin-top: 20px;
+      display: flex;
+
       padding: 20px;
-      border: 1px solid #eee;
-      border-radius: 5px;
+      border-bottom: 1px solid #eee;
+      border-radius: 2px;
 
-      .item-info {
-        font-size: 20px;
-        font-weight: 600;
-        color: #333;
-        margin-bottom: 10px;
+      .content-main {
+        flex: 1;
+
+        .item-info {
+          font-size: 14px;
+          font-weight: 200;
+          color: #656565;
+          margin-bottom: 10px;
+        }
+
+        .item-pre {
+          font-size: 16px;
+          color: #666;
+          margin-bottom: 10px;
+
+          .item-title {
+            font-weight: 800;
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+          }
+
+          .item-desc {
+            font-size: 14px;
+            color: #999;
+            @include ellipsis(2)
+          }
+        }
+
+        .item-footer {
+          font-size: 14px;
+          color: #999;
+        }
       }
 
-      .item-pre {
-        font-size: 16px;
-        color: #666;
-        margin-bottom: 10px;
-      }
+      .article-cover {
+        margin-left: 20px;
 
-      .item-footer {
-        font-size: 14px;
-        color: #999;
+        &>img {
+          width: 170px;
+          height: 110px;
+        }
       }
     }
   }
