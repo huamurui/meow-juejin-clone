@@ -32,6 +32,12 @@
   margin: 8rem;
   margin-top: 2rem;
 
+  @media screen and (max-width: 768px) {
+    margin: 0;
+    margin-top: 0.5rem;
+    gap: 0;
+  }
+
   .content {
     width: 100%;
     max-width: 780px;

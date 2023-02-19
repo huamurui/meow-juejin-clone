@@ -29,6 +29,7 @@ let tags = [
   margin-top: 60px;
   border-top: #f5f5f5 1px solid;
   height: 40px;
+  overflow: auto;
 
   .container {
     display: flex;

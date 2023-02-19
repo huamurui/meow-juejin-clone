@@ -22,6 +22,20 @@ const response = await find<Article>('articles', {
   populate: ['author', 'cover'],
 })
 
+
+useHead({
+  title: 'meow 掘金',
+  meta: [
+    { name: 'description', content: 'a website inspired by juejin.' },
+    { name: 'keywords', content: 'juejin, meow, vue3, nuxt3, strapi' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+  script: [{ children: 'console.log(\'Hello world\')' }]
+})
+
 </script>
 
 <style lang="scss" scoped>
