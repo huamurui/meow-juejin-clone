@@ -21,8 +21,10 @@
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/handle";
+
 .juejin {
-  background-color: #eee;
+  @include background_color("background_color2");
 }
 
 .container {

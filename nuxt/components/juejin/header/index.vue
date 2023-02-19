@@ -106,6 +106,7 @@ header {
   top: 0;
   width: 100%;
   @include background_color("background_color1");
+  @include border_color("border_color1");
 
   .container {
     display: flex;
@@ -149,11 +150,12 @@ header {
           display: flex;
           position: absolute;
           top: 60px;
-          left: 150px;
+          left: 50px;
           width: 100px;
           flex-direction: column;
           align-items: center;
           background-color: #fff;
+          @include background_color("background_color1");
           border-radius: 4px;
           box-shadow: inset 0 0 0 1px #e6e6e6;
 
@@ -162,8 +164,9 @@ header {
             align-items: center;
             font-size: 16px;
             height: 50px;
-            color: #333;
+
             cursor: pointer;
+            @include font_color("font_color1");
             border-bottom: 2px solid transparent;
 
             &:hover {
@@ -173,6 +176,8 @@ header {
           }
         }
       }
+
+
     }
 
     .nav {

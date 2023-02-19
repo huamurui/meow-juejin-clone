@@ -63,11 +63,13 @@ const authors = [
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/handle";
+
 .aside {
   width: 240px;
   display: flex;
   flex-direction: column;
-  background-color: #eee;
+  @include background_color("background_color2");
   gap: 1rem;
 
 
@@ -79,7 +81,6 @@ const authors = [
     .adv-cover {
       width: 100%;
       height: 200px;
-      // background-color: #ff8888;
 
       &>img {
         width: 100%;
@@ -98,7 +99,7 @@ const authors = [
     width: 100%;
     height: 74px;
     display: flex;
-    background-color: #fff;
+    @include background_color("background_color1");
 
     .app-link {
       width: 100%;
@@ -129,7 +130,7 @@ const authors = [
         .desc {
           margin: 5px;
           font-size: 0.8rem;
-          color: #999;
+          @include font_color("font_color2");
         }
       }
     }
@@ -142,7 +143,7 @@ const authors = [
 
     .ranking-info {
       padding: 1rem;
-      background-color: #fff;
+      @include background_color("background_color1");
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -152,7 +153,9 @@ const authors = [
         height: 40px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #ababab;
+        @include border_color("border_color1");
+
         font-size: 1rem;
         font-weight: 300;
       }
@@ -168,6 +171,7 @@ const authors = [
         grid-template-rows: 1fr 1fr;
         align-items: center;
         border-bottom: 1px solid #eee;
+        @include border_color("border_color1");
 
         .author-avatar {
           grid-area: author-avatar;
@@ -201,7 +205,7 @@ const authors = [
           margin: 10px;
           align-items: center;
           font-size: 0.8rem;
-          color: #999;
+          @include font_color("font_color2");
         }
       }
 

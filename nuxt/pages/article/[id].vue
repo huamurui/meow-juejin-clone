@@ -7,11 +7,11 @@
         <div class="content-title">
           <h1>{{ re.data.attributes.title }}</h1>
         </div>
-        <div class="content-cover">
+        <div class="content-cover" v-if="re.data.attributes.cover.data !== null">
           <img :src="`http://localhost:1337${re.data.attributes.cover.data.attributes.url}`" alt="article-cover">
         </div>
         <div class="content-author-info">
-          <div class="content-author-info-avatar">
+          <div class="content-author-info-avatar" v-if="re.data.attributes.author.data.attributes.avatar.data != null">
             <img :src="`http://localhost:1337${re.data.attributes.author.data.attributes.avatar.data.attributes.url}`"
               alt="author-avatar">
           </div>
@@ -27,10 +27,8 @@
         </div>
       </div>
       <div class="toc">
-        <div v-for="(item, index) in toc" :key="index">
-          <div class="toc-item"
-            :style="{ marginLeft: item.level * 10 + 'px', color: isToc === index ? '#2d6fff' : '#666', borderLeft: isToc === index ? '#2d6fff' : '#666' }"
-            @click="setToc(index)">
+        <div v-for="(item, index) in toc" :key="index" :class="isToc === index ? 'active' : ' '">
+          <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">
             {{ item.title }}
           </div>
         </div>
@@ -111,7 +109,7 @@ useHead({
 
 
 <style lang="scss" scoped>
-@import "~/assets/css/main.scss";
+@import "~/assets/css/handle";
 @import "~/assets/css/github-markdown.css";
 
 
@@ -130,7 +128,14 @@ useHead({
 }
 
 .lala {
-  background-color: #eee;
+  @include background_color("background_color2");
+  @include font_color("font_color2");
+}
+
+.active {
+  color: rgb(48, 93, 197);
+  font-weight: 600;
+  border-left: #3290de 3px solid;
 }
 
 .view {
@@ -197,15 +202,16 @@ useHead({
     border: #666 1px solid;
     border-radius: 5px;
     width: 200px;
-    height: 500px;
+    height: fit-content;
+    max-height: 500px;
+    overflow-y: auto;
     // 貌似是必须要有width 和 height 最上面那个 position: sticky 才能生效
 
     .toc-item {
       display: block;
       padding: 5px 10px;
-      color: #666;
+      @include font_color("font_color1");
       cursor: pointer;
-      border-left: #666 2px solid;
     }
   }
 }

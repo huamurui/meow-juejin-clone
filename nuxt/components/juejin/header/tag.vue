@@ -38,6 +38,8 @@ console.log(response.data)
 </script>
 
 <style lang="scss" scoped>
+@import "~/assets/css/handle";
+
 .active {
   color: #007fff;
 }
@@ -45,6 +47,7 @@ console.log(response.data)
 .tag {
   margin-top: 60px;
   border-top: #f5f5f5 1px solid;
+  @include border_color("border_color1");
   height: 46px;
   overflow: auto;
 
