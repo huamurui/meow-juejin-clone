@@ -3,7 +3,7 @@
     <main>
       <div class="content">
         <div class="content-item" v-for="(article, index) in articles" :key="index">
-          <NuxtLink :to="`/juejin/article/${article.id}`" class="content-main">
+          <NuxtLink :to="`/article/${article.id}`" class="content-main">
             <div class="item-info">
               {{ article.attributes.author.data.attributes.username }} 发布于
               {{ article.attributes.createdAt }}
@@ -40,8 +40,6 @@ defineProps<{
 @import "~/assets/css/handle";
 
 main {
-
-
   .content {
     max-width: 1200px;
     margin: 0 auto;
@@ -72,7 +70,7 @@ main {
 
           .item-title {
             font-weight: 800;
-            font-size: 22px;
+            font-size: 1rem;
             color: #333;
             margin-bottom: 10px;
           }
@@ -91,11 +89,25 @@ main {
       }
 
       .article-cover {
+        // @media screen and (max-width: 768px) {
+        //   margin-left: 10px;
+
+        //   &>img {
+        //     width: 100px;
+        //     height: 60px;
+        //   }
+
+        // }
+        @media screen and (max-width: 460px) {
+          display: none;
+
+        }
+
         margin-left: 20px;
 
         &>img {
-          width: 170px;
-          height: 110px;
+          width: 120px;
+          height: 80px;
         }
       }
     }

@@ -1,42 +1,48 @@
 <template>
-
-  <NuxtLink to="/juejin">Juejin Clone</NuxtLink> <a>← click here...比较惨不忍睹...可以的话，自己把样式重写一遍也可以</a>
-
-  <div class="emmmm">
-    just...something
+  <div class="juejin">
+    <NuxtLayout name="juejin-index">
+      <template #header>
+        <JuejinHeader></JuejinHeader>
+        <JuejinHeaderTag></JuejinHeaderTag>
+      </template>
+      <template #content>
+        <JuejinFeed :articles="response.data"></JuejinFeed>
+      </template>
+      <template #aside>
+        <JuejinAside></JuejinAside>
+      </template>
+    </NuxtLayout>
   </div>
 </template>
 
-
 <script setup lang="ts">
-// definePageMeta({
-//   layout: false
-// });
+const { find } = useStrapi()
+
+const response = await find<Article>('articles', {
+  populate: ['author', 'cover'],
+})
 
 
 useHead({
   title: 'meow 掘金',
   meta: [
-    { name: 'description', content: 'My amazing site.' }
+    { name: 'description', content: 'a website inspired by juejin.' },
+    { name: 'keywords', content: 'juejin, meow, vue3, nuxt3, strapi' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
   ],
   bodyAttrs: {
     class: 'test'
   },
   script: [{ children: 'console.log(\'Hello world\')' }]
 })
+
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "~/assets/css/handle";
 
-
-.emmmm {
-  height: 120vh;
-
-  font-size: 18px;
+* {
   @include font_color("font_color1");
   @include background_color("background_color1");
-  @include border_color("border_color1");
-
 }
 </style>

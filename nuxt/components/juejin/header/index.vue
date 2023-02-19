@@ -2,8 +2,13 @@
   <div>
     <header>
       <div class="container">
-        <NuxtLink :to="`/juejin`" class="logo">
-          <img src="/juejin.svg" alt="掘金" />
+        <NuxtLink :to="`/`" class="logo">
+          <!-- https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images -->
+          <picture>
+            <source media="(max-width: 799px)" srcset="/juejin-small.svg" />
+            <source media="(min-width: 800px)" srcset="/juejin.svg" />
+            <img src="/juejin.svg" alt="掘金-图标" />
+          </picture>
         </NuxtLink>
         <div class="nav">
           <div class="nav-item" v-for="(nav, index) in navs">
@@ -22,8 +27,8 @@
               </svg>
             </div>
           </div>
-          <div class="nav-list-small">
-            <div class="nav-item-small" v-show="ishow" v-for="(nav, index) in navs">
+          <div class="nav-list-small" v-show="ishow">
+            <div class="nav-item-small" v-for="(nav, index) in navs">
               {{ nav }}
             </div>
           </div>
@@ -58,6 +63,9 @@
 <script setup lang="ts">
 
 // const { find }= useStrapi()
+
+import { onMounted } from 'vue';
+
 // const nav = await find('navs')
 let isdark = ref(false)
 const changeT = () => {
@@ -194,4 +202,5 @@ header {
       }
     }
   }
-}</style>
+}
+</style>
