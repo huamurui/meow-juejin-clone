@@ -55,6 +55,9 @@
       "relation": "oneToMany",
       "target": "api::like.like",
       "mappedBy": "article"
+    },
+    "displayName": {
+      "type": "string"
     }
   }
 }

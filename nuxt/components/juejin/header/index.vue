@@ -11,7 +11,7 @@
           </picture>
         </NuxtLink>
         <div class="nav">
-          <div class="nav-item" v-for="(nav, index) in navs">
+          <div class="nav-item" v-for="(nav, index) in navs" :class="index === 0 ? 'active' : ''">
             {{ nav }}
           </div>
         </div>
@@ -62,10 +62,7 @@
 
 <script setup lang="ts">
 
-// const { find }= useStrapi()
-
-import { onMounted } from 'vue';
-
+const route = useRoute()
 // const nav = await find('navs')
 let isdark = ref(false)
 const changeT = () => {
@@ -89,6 +86,10 @@ let navs = [
 
 <style lang="scss" scoped>
 @import "~/assets/css/handle";
+
+.active {
+  color: #007fff;
+}
 
 .theme-toggle {
   position: absolute;
@@ -129,7 +130,6 @@ header {
           align-items: center;
           height: 100%;
           font-size: 16px;
-          color: #333;
           cursor: pointer;
           border-bottom: 2px solid transparent;
 
@@ -189,9 +189,8 @@ header {
         flex-shrink: 0;
         align-items: center;
         height: 100%;
-        margin-left: 20px;
+        margin: 18px;
         font-size: 16px;
-        color: #333;
         cursor: pointer;
         border-bottom: 2px solid transparent;
 

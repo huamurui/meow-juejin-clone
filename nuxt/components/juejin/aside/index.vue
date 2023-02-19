@@ -2,23 +2,35 @@
   <div>
     <aside>
       <div class="aside">
-        <div class="adv">
-          <div class="adv-cover">
-            img
-          </div>
-          <div class="adv-info">
-            qr code
+        <div class="adv" v-for="(ad, index) in ads">
+          <NuxtLink :to="`${ad.attributes.link}`" class="adv-cover">
+            <img :src="`http://localhost:1337${ad.attributes.cover.data.attributes.url}`" alt="ads">
+          </NuxtLink>
+        </div>
+        <div class="qr-code">
+          <div class="app-link">
+            <img src="//lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/home.59780ae.png" class="qr-img"
+              alt="qr-img">
+            <div class="content-box">
+              <div class="headline">下载稀土掘金APP</div>
+              <div class="desc">一个帮助开发者成长的社区</div>
+            </div>
           </div>
         </div>
         <div class="ranking">
           <div class="ranking-info">
+            <header>作者榜</header>
             <div class="ranking-item" v-for="(author, index) in authors" :key="index">
               <div class="author-avatar">
                 <img :src="author.avatar" alt="avatar" />
               </div>
+              <div class="author-name">
+                {{ author.name }}
+              </div>
               <div class="author-info">
                 {{ author.info }}
               </div>
+
             </div>
           </div>
         </div>
@@ -28,13 +40,23 @@
 </template>
 
 <script setup lang="ts">
+const { find } = useStrapi()
+
+const re = await find<Ad>('ads', {
+  populate: ['cover'],
+})
+const ads = re.data
+console.log(ads)
+
 const authors = [
   {
-    info: '张三',
+    name: '张三',
+    info: 'lalala',
     avatar: 'http://huamurui.github.io/logo.svg'
   },
   {
-    info: '张三',
+    name: '张三',
+    info: 'lalala',
     avatar: 'http://huamurui.github.io/logo.svg'
   }
 ]
@@ -42,23 +64,74 @@ const authors = [
 
 <style lang="scss" scoped>
 .aside {
-  width: 260px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  background-color: #eee;
+  gap: 1rem;
+
 
   .adv {
     // position: sticky;
+    display: flex;
     width: 100%;
-    background-color: #eee;
 
     .adv-cover {
       width: 100%;
-      height: 260px;
-      background-color: #ff8888;
+      height: 200px;
+      // background-color: #ff8888;
+
+      &>img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .adv-info {
       width: 100%;
       height: 80px;
-      background-color: #fbff88;
+    }
+
+  }
+
+  .qr-code {
+    width: 100%;
+    height: 74px;
+    display: flex;
+    background-color: #fff;
+
+    .app-link {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .qr-img {
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+      }
+
+      .content-box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .headline {
+          margin: 5px;
+          font-size: 1rem;
+          font-weight: 300;
+        }
+
+        .desc {
+          margin: 5px;
+          font-size: 0.8rem;
+          color: #999;
+        }
+      }
     }
 
   }
@@ -66,37 +139,74 @@ const authors = [
   .ranking {
     width: 100%;
     height: 200px;
-    background-color: #eee;
 
     .ranking-info {
-      width: 100%;
-      height: 100%;
+      padding: 1rem;
       background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      header {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        font-size: 1rem;
+        font-weight: 300;
+      }
 
       .ranking-item {
         width: 100%;
-        height: 50px;
-        background-color: #eee;
-        display: flex;
+        height: 70px;
+        display: grid;
+        grid-template-areas:
+          "author-avatar author-name"
+          "author-avatar author-info";
+        grid-template-columns: 46px 1fr;
+        grid-template-rows: 1fr 1fr;
         align-items: center;
+        border-bottom: 1px solid #eee;
 
         .author-avatar {
-          width: 30px;
-          height: 30px;
-          background-color: #eee;
-          margin-left: 10px;
+          grid-area: author-avatar;
+          width: 46px;
+          height: 46px;
+          border-radius: 50%;
+          overflow: hidden;
 
-          img {
+          &>img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
           }
         }
 
-        .author-info {
+        .author-name {
+          grid-area: author-name;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
           margin-left: 10px;
+          font-size: 1rem;
+          font-weight: 300;
+        }
+
+        .author-info {
+          grid-area: author-info;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          margin: 10px;
+          align-items: center;
+          font-size: 0.8rem;
+          color: #999;
         }
       }
+
+
+
     }
   }
 }

@@ -3,9 +3,15 @@
 
     <div class="tag">
       <div class="container">
-        <div class="tag-item" v-for="(tag, index) in tags">
-          {{ tag }}
-        </div>
+        <NuxtLink :to="`/`" class="tag-item">
+          全部
+        </NuxtLink>
+
+        <NuxtLink :to="`/${tag.attributes.categoryName}`" class="tag-item"
+          :class="route.params.tag === tag.attributes.categoryName ? 'active' : ''" v-for="(tag, index) in categories">
+          {{ tag.attributes.displayName }}
+          {{ }}
+        </NuxtLink>
       </div>
     </div>
   </div>
@@ -13,22 +19,33 @@
 
 <script setup lang="ts">
 
-let tags = [
-  '前端',
-  '后端',
-  'Android',
-  'iOS',
-  '人工智能',
-  '设计',
-  '产品',
-]
+const route = useRoute()
+let tag = route.params.tag
+if (!tag) {
+  tag = 'all'
+}
+
+const { find } = useStrapi()
+
+const response = await find<Category>('categories', {
+  populate: ['articles', 'cover'],
+})
+
+
+const categories = response.data
+console.log(response.data)
+
 </script>
 
 <style lang="scss" scoped>
+.active {
+  color: #007fff;
+}
+
 .tag {
   margin-top: 60px;
   border-top: #f5f5f5 1px solid;
-  height: 40px;
+  height: 46px;
   overflow: auto;
 
   .container {
@@ -47,8 +64,9 @@ let tags = [
 
       margin-left: 20px;
       font-size: 14px;
-      color: #333;
       cursor: pointer;
+
+
 
       &:hover {
         color: #007fff;

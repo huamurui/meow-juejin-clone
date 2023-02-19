@@ -42,30 +42,7 @@
     width: 100%;
     max-width: 780px;
 
-    .item {
-      width: 100%;
-      height: 200px;
-      background-color: #eee;
-      margin-bottom: 20px;
 
-      .item-info {
-        width: 100%;
-        height: 50px;
-        background-color: #eee;
-      }
-
-      .item-pre {
-        width: 100%;
-        height: 100px;
-        background-color: #eee;
-      }
-
-      .item-footer {
-        width: 100%;
-        height: 50px;
-        background-color: #eee;
-      }
-    }
   }
 }
 </style>
