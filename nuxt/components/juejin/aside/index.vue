@@ -4,7 +4,7 @@
       <div class="aside">
         <div class="adv" v-for="(ad, index) in ads">
           <NuxtLink :to="`${ad.attributes.link}`" class="adv-cover">
-            <img :src="`http://localhost:1337${ad.attributes.cover.data.attributes.url}`" alt="ads">
+            <img :src="`${config.apiBase}${ad.attributes.cover.data.attributes.url}`" alt="ads">
           </NuxtLink>
         </div>
         <div class="qr-code">
@@ -22,13 +22,13 @@
             <header>作者榜</header>
             <div class="ranking-item" v-for="(author, index) in authors" :key="index">
               <div class="author-avatar">
-                <img :src="author.avatar" alt="avatar" />
+                <img :src="`${config.apiBase}${author.avatar.url}`" alt="avatar" />
               </div>
               <div class="author-name">
-                {{ author.name }}
+                {{ author.username }}
               </div>
               <div class="author-info">
-                {{ author.info }}
+                {{ author.email }}
               </div>
 
             </div>
@@ -40,26 +40,23 @@
 </template>
 
 <script setup lang="ts">
+const config = useRuntimeConfig()
+
+
 const { find } = useStrapi()
 
 const re = await find<Ad>('ads', {
   populate: ['cover'],
 })
 const ads = re.data
-console.log(ads)
 
-const authors = [
-  {
-    name: '张三',
-    info: 'lalala',
-    avatar: 'http://huamurui.github.io/logo.svg'
-  },
-  {
-    name: '张三',
-    info: 'lalala',
-    avatar: 'http://huamurui.github.io/logo.svg'
-  }
-]
+
+const re2 = await find<Person>('users', {
+  populate: ['avatar'],
+})
+
+const authors = re2
+
 </script>
 
 <style lang="scss" scoped>

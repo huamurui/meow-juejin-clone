@@ -33,7 +33,6 @@ const response = await find<Category>('categories', {
 
 
 const categories = response.data
-console.log(response.data)
 
 </script>
 

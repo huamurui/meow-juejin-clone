@@ -34,9 +34,9 @@ interface Person {
   id: number
   username: string
 
-  avatar: any
+  avatar: any | null
   email: string
 
-  articles: Article[]
-  moments: Moment[]
+  articles: Article[] | null
+  moments: Moment[] | null
 }

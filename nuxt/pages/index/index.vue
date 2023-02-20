@@ -32,8 +32,7 @@ useHead({
   ],
   bodyAttrs: {
     class: 'test'
-  },
-  script: [{ children: 'console.log(\'Hello world\')' }]
+  }
 })
 
 </script>

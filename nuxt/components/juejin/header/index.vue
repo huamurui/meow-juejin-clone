@@ -106,6 +106,7 @@ header {
   top: 0;
   width: 100%;
   @include background_color("background_color1");
+  @include font_color("font_color1");
   @include border_color("border_color1");
 
   .container {

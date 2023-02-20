@@ -11,5 +11,10 @@ export default defineNuxtConfig({
         { children: 'JavaScript is required' }
       ]
     }
-  }
+  },
+  runtimeConfig: {
+    // Private config that is only available on the server
+    apiBase: 'http://localhost:1337',
+    // Config within public will be also exposed to the client
+  },
 })

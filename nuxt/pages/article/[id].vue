@@ -8,11 +8,11 @@
           <h1>{{ re.data.attributes.title }}</h1>
         </div>
         <div class="content-cover" v-if="re.data.attributes.cover.data !== null">
-          <img :src="`http://localhost:1337${re.data.attributes.cover.data.attributes.url}`" alt="article-cover">
+          <img :src="`${config.apiBase}${re.data.attributes.cover.data.attributes.url}`" alt="article-cover">
         </div>
         <div class="content-author-info">
           <div class="content-author-info-avatar" v-if="re.data.attributes.author.data.attributes.avatar.data != null">
-            <img :src="`http://localhost:1337${re.data.attributes.author.data.attributes.avatar.data.attributes.url}`"
+            <img :src="`${config.apiBase}${re.data.attributes.author.data.attributes.avatar.data.attributes.url}`"
               alt="author-avatar">
           </div>
           <div class="content-author-info-name">
@@ -26,10 +26,35 @@
           <Viewer :value="markdowns" :plugins="plugins" />
         </div>
       </div>
-      <div class="toc">
-        <div v-for="(item, index) in toc" :key="index" :class="isToc === index ? 'active' : ' '">
-          <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">
-            {{ item.title }}
+      <div class="aside">
+        <div class="author">
+          <div class="author-avatar">
+            <img :src="`${config.apiBase}${re.data.attributes.author.data.attributes.avatar.data.attributes.url}`"
+              alt="avatar" />
+          </div>
+          <div class="author-name">
+            {{ re.data.attributes.author.data.attributes.username }}
+          </div>
+          <div class="author-info">
+            {{ re.data.attributes.author.data.attributes.email }}
+          </div>
+        </div>
+        <div class="relative-articles">
+          <div class="desc" style="margin: 10px;font-size: 18px;font-weight: 500;">
+            相关文章
+          </div>
+          <div v-for="(item, index) in relative" :key="index">
+            <div class="relative-articles-item">
+              {{ item.attributes.title }}
+            </div>
+          </div>
+        </div>
+
+        <div class="toc">
+          <div v-for="(item, index) in toc" :key="index" :class="isToc === index ? 'active' : ' '">
+            <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">
+              {{ item.title }}
+            </div>
           </div>
         </div>
       </div>
@@ -42,17 +67,16 @@ import { onMounted, ref } from 'vue'
 import gfm from '@bytemd/plugin-gfm'
 import { Viewer } from '@bytemd/vue-next'
 // import 'bytemd/dist/index.css'
-// import "github-markdown.css"
 
 // https://github.com/bytedance/bytemd/issues/126
 
 // https://github.com/xitu/juejin-markdown-themes
-
+const config = useRuntimeConfig()
 const plugins = [
   gfm(),
   // Add more plugins here
 ]
-const { findOne } = useStrapi()
+const { findOne, find } = useStrapi()
 const route = useRoute()
 const id = route.params.id as string
 const re = await findOne<Article>('articles', id, {
@@ -65,6 +89,9 @@ const re = await findOne<Article>('articles', id, {
     cover: true,
   },
 })
+const res = await find<Article>('articles')
+const relative = res.data
+
 
 let markdowns = re.data.attributes.content
 // get h1-h6
@@ -110,7 +137,7 @@ useHead({
 
 <style lang="scss" scoped>
 @import "~/assets/css/handle";
-@import "~/assets/css/github-markdown.css";
+// @import "~/assets/css/github-markdown.css";
 
 
 .markdown-body {
@@ -148,6 +175,14 @@ useHead({
   @media screen and (max-width: 768px) {
     margin: 0;
     margin-top: 5rem;
+
+    .content {
+      padding: 0;
+    }
+
+    .aside {
+      display: none;
+    }
   }
 
   .content {
@@ -194,35 +229,106 @@ useHead({
     }
   }
 
-  .toc {
-    position: sticky;
-    top: 120px;
-    @include background_color("background_color1");
-    padding: 20px;
-    border: #666 1px solid;
-    border-radius: 5px;
-    width: 200px;
-    height: fit-content;
-    max-height: 500px;
-    overflow-y: auto;
-    // 貌似是必须要有width 和 height 最上面那个 position: sticky 才能生效
 
-    .toc-item {
-      display: block;
-      padding: 5px 10px;
-      @include font_color("font_color1");
-      cursor: pointer;
+  .aside {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    gap: 15px;
+
+
+
+    .author {
+      width: 100%;
+      height: 70px;
+      display: grid;
+      width: 220px;
+      padding: 10px;
+      grid-template-areas:
+        "author-avatar author-name"
+        "author-avatar author-info";
+      grid-template-columns: 46px 1fr;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      border-bottom: 1px solid;
+      border-radius: 5px;
+      @include background_color("background_color1");
+      @include border_color("border_color1");
+
+      .author-avatar {
+        grid-area: author-avatar;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        &>img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .author-name {
+        grid-area: author-name;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        font-size: 1rem;
+        font-weight: 300;
+      }
+
+      .author-info {
+        grid-area: author-info;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        margin: 10px;
+        align-items: center;
+        font-size: 0.8rem;
+        @include font_color("font_color2");
+      }
     }
-  }
-}
 
-@media screen and (max-width: 768px) {
-  .view {
-    grid-template-columns: 1fr;
-  }
+    .relative-articles {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 5px;
+      @include background_color("background_color1");
+      @include border_color("border_color1");
 
-  .toc {
-    display: none;
+      .relative-articles-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid;
+        @include border_color("border_color1");
+
+      }
+    }
+
+    .toc {
+      position: sticky;
+      top: 120px;
+      @include background_color("background_color1");
+      padding: 20px;
+      border: #666 1px solid;
+      @include border_color("border_color1");
+      border-radius: 5px;
+      width: 200px;
+      height: fit-content;
+      max-height: 500px;
+      overflow-y: auto;
+      // 貌似是必须要有width 和 height 最上面那个 position: sticky 才能生效
+
+      .toc-item {
+        display: block;
+        padding: 5px 10px;
+        @include font_color("font_color1");
+        cursor: pointer;
+      }
+    }
   }
 }
 </style>
