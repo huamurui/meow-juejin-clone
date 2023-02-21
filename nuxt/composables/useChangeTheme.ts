@@ -1,8 +1,6 @@
 // only run in client (browser)
 
 let circle:any = ref(false)
-//...神经病吧这里也写 any...
-// if (!import.meta.env.SSR) 
 
 let theme:any
 let setLight:any
@@ -31,20 +29,16 @@ if(process.client){
     setDark()
   }
 }
-// 我需要全局的执行这些代码...
 const useChangeTheme = () => {
   if(process.client){
-    
-  if (theme === 'light-juejin') {
-    setDark()
-  } 
-  if (theme === 'dark-meow') {
-    setLight()
+    if (theme === 'light-juejin') {
+      setDark()
+    } 
+    if (theme === 'dark-meow') {
+      setLight()
+    }
+    theme = localStorage.getItem('theme')
   }
-
-  // 对。。。别tmd忘了get更新一下theme，你个笨蛋
-  theme = localStorage.getItem('theme')
-}
 }
 
 export { useChangeTheme , circle}

@@ -17,11 +17,15 @@
               </div>
             </div>
             <div class="item-footer">
-              action bar
+              <div class="action-bar">
+                <div class="action-view">view</div>
+                <div class="action-good">good</div>
+                <div class="action-talk">talk</div>
+              </div>
             </div>
           </NuxtLink>
           <div v-if="article.attributes.cover.data != null" class="article-cover">
-            <img :src="`http://localhost:1337${article.attributes.cover.data.attributes.url}`" alt="">
+            <img :src="`${useRuntimeConfig().apiBase}${article.attributes.cover.data.attributes.url}`" alt="">
           </div>
         </div>
       </div>
@@ -51,6 +55,7 @@ main {
 
       padding: 20px;
       border-bottom: 1px solid #eee;
+      @include border_color("border_color1");
       border-radius: 2px;
 
       .content-main {
@@ -59,19 +64,19 @@ main {
         .item-info {
           font-size: 14px;
           font-weight: 200;
-          color: #656565;
+          @include font_color("font_color2");
           margin-bottom: 10px;
         }
 
         .item-pre {
           font-size: 16px;
-          color: #666;
+          @include font_color("font_color2");
           margin-bottom: 10px;
 
           .item-title {
             font-weight: 800;
             font-size: 1rem;
-            color: #333;
+            @include font_color("font_color1");
             margin-bottom: 10px;
           }
 
@@ -83,8 +88,18 @@ main {
         }
 
         .item-footer {
-          font-size: 14px;
-          color: #999;
+
+          .action-bar {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+
+            &>div {
+              margin-right: 20px;
+              font-size: 14px;
+              @include font_color("font_color2");
+            }
+          }
         }
       }
 

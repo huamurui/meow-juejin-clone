@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header>
+    <header :class="isHide === true ? 'hide' : ''">
       <div class="container">
         <NuxtLink :to="`/`" class="logo">
           <!-- https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images -->
@@ -11,7 +11,7 @@
           </picture>
         </NuxtLink>
         <div class="nav">
-          <div class="nav-item" v-for="(nav, index) in navs">
+          <div class="nav-item" v-for="(nav, index) in navs" :class="index === 0 ? 'active' : ''">
             {{ nav }}
           </div>
         </div>
@@ -62,10 +62,7 @@
 
 <script setup lang="ts">
 
-// const { find }= useStrapi()
-
-import { onMounted } from 'vue';
-
+const route = useRoute()
 // const nav = await find('navs')
 let isdark = ref(false)
 const changeT = () => {
@@ -85,10 +82,35 @@ let navs = [
   '活动',
 ]
 
+
+if (process.client) {
+  window.addEventListener('scroll', useListeningScroll)
+}
+
+// useListeningScroll()
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/css/handle";
+
+.hide {
+  top: -60px;
+  animation: hideAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes hideAnimation {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -60px;
+  }
+}
+
+.active {
+  color: #007fff;
+}
 
 .theme-toggle {
   position: absolute;
@@ -105,6 +127,8 @@ header {
   top: 0;
   width: 100%;
   @include background_color("background_color1");
+  @include font_color("font_color1");
+  @include border_color("border_color1");
 
   .container {
     display: flex;
@@ -129,7 +153,6 @@ header {
           align-items: center;
           height: 100%;
           font-size: 16px;
-          color: #333;
           cursor: pointer;
           border-bottom: 2px solid transparent;
 
@@ -149,11 +172,12 @@ header {
           display: flex;
           position: absolute;
           top: 60px;
-          left: 150px;
+          left: 50px;
           width: 100px;
           flex-direction: column;
           align-items: center;
           background-color: #fff;
+          @include background_color("background_color1");
           border-radius: 4px;
           box-shadow: inset 0 0 0 1px #e6e6e6;
 
@@ -162,8 +186,9 @@ header {
             align-items: center;
             font-size: 16px;
             height: 50px;
-            color: #333;
+
             cursor: pointer;
+            @include font_color("font_color1");
             border-bottom: 2px solid transparent;
 
             &:hover {
@@ -173,6 +198,8 @@ header {
           }
         }
       }
+
+
     }
 
     .nav {
@@ -189,9 +216,8 @@ header {
         flex-shrink: 0;
         align-items: center;
         height: 100%;
-        margin-left: 20px;
+        margin: 18px;
         font-size: 16px;
-        color: #333;
         cursor: pointer;
         border-bottom: 2px solid transparent;
 
