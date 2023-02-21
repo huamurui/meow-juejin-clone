@@ -13,8 +13,12 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    // Private config that is only available on the server
-    apiBase: 'http://localhost:1337',
-    // Config within public will be also exposed to the client
+    public: {
+      // default or private useRuntimeConfig will return undefined after changing the route by NuxtLink ... it works only on the first page load or refresh.
+      // Private config only available on the server...
+      apiBase: '',
+      // Config within public will be also exposed to the client
+    }
+
   },
 })

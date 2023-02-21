@@ -165,14 +165,9 @@ useHead({
   border-left: #3290de 3px solid;
 }
 
-.view {
-  display: flex;
 
-  gap: 15px;
-  margin: 8rem;
-  justify-content: center;
-
-  @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  .view {
     margin: 0;
     margin-top: 5rem;
 
@@ -184,6 +179,16 @@ useHead({
       display: none;
     }
   }
+}
+
+.view {
+  display: flex;
+
+  gap: 15px;
+  margin: 8rem;
+  justify-content: center;
+
+
 
   .content {
     flex: 1;
@@ -231,7 +236,7 @@ useHead({
 
 
   .aside {
-    display: flex;
+    // display: flex;
     flex-direction: column;
     width: 240px;
     gap: 15px;

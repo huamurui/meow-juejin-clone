@@ -25,7 +25,7 @@
             </div>
           </NuxtLink>
           <div v-if="article.attributes.cover.data != null" class="article-cover">
-            <img :src="`${config.apiBase}${article.attributes.cover.data.attributes.url}`" alt="">
+            <img :src="`${useRuntimeConfig().apiBase}${article.attributes.cover.data.attributes.url}`" alt="">
           </div>
         </div>
       </div>
@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-const config = useRuntimeConfig()
 defineProps<{
   articles: any;
 }>();

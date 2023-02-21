@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header>
+    <header :class="isHide === true ? 'hide' : ''">
       <div class="container">
         <NuxtLink :to="`/`" class="logo">
           <!-- https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images -->
@@ -82,10 +82,31 @@ let navs = [
   '活动',
 ]
 
+
+if (process.client) {
+  window.addEventListener('scroll', useListeningScroll)
+}
+
+// useListeningScroll()
 </script>
 
 <style lang="scss" scoped>
 @import "~/assets/css/handle";
+
+.hide {
+  top: -60px;
+  animation: hideAnimation 0.5s ease-in-out forwards;
+}
+
+@keyframes hideAnimation {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -60px;
+  }
+}
 
 .active {
   color: #007fff;
