@@ -10,7 +10,6 @@ const  useListeningScroll= ()=> {
   let scrollStep = scrollTop - oldScrollTop.value;
   // 更新——滚动前，滚动条距文档顶部的距离
   oldScrollTop.value = scrollTop;
-  console.log('scrollStep')
   if (scrollStep < 0) {
     isHide.value = false;
   } else {
