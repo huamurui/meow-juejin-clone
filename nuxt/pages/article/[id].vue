@@ -44,13 +44,25 @@
             相关文章
           </div>
           <div v-for="(item, index) in relative" :key="index">
-            <div class="relative-articles-item">
-              {{ item.attributes.title }}
-            </div>
+            <NuxtLink :to="`/article/${item.id}`">
+              <div class="relative-articles-item">
+                <div style="font-size: 16px;">
+                  {{ item.attributes.title }}
+                </div>
+                <div style="font-size: 12px;color: #999;">
+                  {{ item.attributes.createdAt }}
+                  some info...
+                </div>
+              </div>
+            </NuxtLink>
           </div>
         </div>
 
         <div class="toc">
+          <div class="desc" style="margin: 10px;font-size: 18px;font-weight: 500;">
+            目录
+          </div>
+
           <div v-for="(item, index) in toc" :key="index" :class="isToc === index ? 'active' : ' '">
             <div class="toc-item" :style="{ marginLeft: item.level * 10 + 'px' }" @click="setToc(index)">
               {{ item.title }}
@@ -324,18 +336,24 @@ useHead({
     }
 
     .relative-articles {
-      width: 100%;
       margin-top: 20px;
       border-radius: 5px;
+      padding: 10px;
       @include background_color("background_color1");
       @include border_color("border_color1");
 
       .relative-articles-item {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
         padding: 10px;
         border-bottom: 1px solid;
         @include border_color("border_color1");
+
+        &:hover {
+          color: #3290de;
+        }
 
       }
     }
@@ -345,6 +363,7 @@ useHead({
       top: 120px;
       @include background_color("background_color1");
       padding: 20px;
+      margin-top: 20px;
       border: #666 1px solid;
       @include border_color("border_color1");
       border-radius: 5px;
