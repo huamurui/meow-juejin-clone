@@ -66,6 +66,7 @@
 import { onMounted, ref } from 'vue'
 import gfm from '@bytemd/plugin-gfm'
 import { Viewer } from '@bytemd/vue-next'
+import { processExpression } from '@vue/compiler-core';
 // import 'bytemd/dist/index.css'
 
 // https://github.com/bytedance/bytemd/issues/126
@@ -95,6 +96,9 @@ const relative = res.data
 
 let markdowns = re.data.attributes.content
 // get h1-h6
+
+// 这是一个很坏的实践...你不如就用 markdown-it 好了，反正掘金的样式也没在 bytemd 里面，而且 bytemd 因为封装的太过度，而且主要功夫都花在了编辑器上...反正在这里是不好用。
+// 虽然你可以查询标题元素生成目录，但监听滚动事件然后激活相应目录... 总之好麻烦。
 let htable: any = []
 let toc: any = reactive([])
 let isToc = ref(0)
@@ -117,12 +121,31 @@ const setToc = (index: number) => {
     el.scrollIntoView(
       {
         behavior: "smooth",  // 平滑过渡
-        block: "center"    // 上边框与视窗顶部平齐
+        block: "center"    // 滚动到中部
       }
     )
   }
 }
 
+
+// 监听页面滚动并激活相应目录
+if (process.client) {
+  window.addEventListener('scroll', () => {
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+    let clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+    let scrollBottom = scrollHeight - scrollTop - clientHeight
+    if (scrollBottom <= 0) {
+      isToc.value = toc.length - 1
+    } else {
+      htable.forEach((item: any, index: number) => {
+        if (item.offsetTop - scrollTop <= 0) {
+          isToc.value = index
+        }
+      })
+    }
+  })
+}
 
 useHead({
   title: re.data.attributes.title + ' | meow 掘金',
@@ -137,7 +160,6 @@ useHead({
 
 <style lang="scss" scoped>
 @import "~/assets/css/handle";
-// @import "~/assets/css/github-markdown.css";
 
 
 .markdown-body {
@@ -148,7 +170,7 @@ useHead({
   padding: 45px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
   .markdown-body {
     padding: 15px;
   }
@@ -168,10 +190,12 @@ useHead({
 
 @media screen and (max-width: 768px) {
   .view {
-    margin: 0;
-    margin-top: 5rem;
+    // 为什么 这里的不生效....下面的就可以...
+    // margin: 0;
+    // margin-top: 5rem;
 
     .content {
+      margin: 0;
       padding: 0;
     }
 
@@ -188,7 +212,10 @@ useHead({
   margin: 8rem;
   justify-content: center;
 
-
+  @media screen and (max-width: 600px) {
+    margin: 0;
+    margin-top: 5rem;
+  }
 
   .content {
     flex: 1;
